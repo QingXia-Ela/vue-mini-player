@@ -35,7 +35,6 @@ createApp().directive('my-dir', myDirective).mount()
 const Draggable = (ctx: any) => {
   const ele: HTMLDivElement = ctx.arg ? document.querySelector(ctx.arg) : ctx.el
   if (!ele) {
-    console.log('gg');
     return
   }
 
@@ -47,7 +46,10 @@ const Draggable = (ctx: any) => {
     ele.style.setProperty('top', y + 'px')
   }
 
-  function onDrag(e: MouseEvent) {
+  function onDrag(e: MouseEvent | {
+    clientX: number
+    clientY: number
+  }) {
     let fx = e.clientX - cx, fy = e.clientY - cy
     if (fx <= 0) fx = 0
     else if (fx + ele.offsetWidth >= window.innerWidth) fx = window.innerWidth - ele.offsetWidth
@@ -55,6 +57,10 @@ const Draggable = (ctx: any) => {
     else if (fy + ele.offsetHeight >= window.innerHeight) fy = window.innerHeight - ele.offsetHeight
     _UpdateXY(fx, fy)
   }
+
+  window.addEventListener('resize', () => {
+    onDrag({ clientX: window.innerWidth, clientY: window.innerHeight })
+  })
 
   function clearState() {
     window.removeEventListener('mousemove', onDrag)
@@ -70,7 +76,6 @@ const Draggable = (ctx: any) => {
     window.addEventListener('mousemove', onDrag)
     window.addEventListener('mouseup', cs)
   })
-
   return () => {
 
   }

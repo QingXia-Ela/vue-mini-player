@@ -10,7 +10,11 @@
 
 <body>
   <div id="app"></div>
-  <div v-scope id="CoreWrapper" v-draggable>
+  <div v-scope id="CoreWrapper" v-draggable v-wrapper-adsorb @mouseup="wrapperMouseUp" @mousedown="wrapperMouseDown"
+    @mouseenter="wrapperMouseEnter" @mouseleave="wrapperMouseLeave"
+    :class="`${dragging ? 'dragging': ''} ${onRight ? 'right' : 'left'} ${hidden ? 'hidden' : ''}`">
+    <div class="left_arrow"></div>
+    <div class="right_arrow"></div>
     <div class="operate_box"></div>
     <div class="list_box"></div>
   </div>
