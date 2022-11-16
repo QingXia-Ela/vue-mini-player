@@ -33,7 +33,7 @@ createApp().directive('my-dir', myDirective).mount()
 
 
 const Draggable = (ctx: any) => {
-  const ele: HTMLDivElement = ctx.arg ? document.querySelector(ctx.arg) : ctx.el
+  const ele: HTMLDivElement = ctx.exp ? document.querySelector(ctx.exp) : ctx.el
   if (!ele) {
     return
   }
@@ -66,7 +66,7 @@ const Draggable = (ctx: any) => {
     window.removeEventListener('mousemove', onDrag)
   }
 
-  ele.addEventListener('mousedown', (e) => {
+  ctx.el.addEventListener('mousedown', (e: MouseEvent) => {
     dragging = true, cx = e.offsetX, cy = e.offsetY
     function cs() {
       dragging = false

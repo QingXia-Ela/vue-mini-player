@@ -40,12 +40,8 @@ const app = PetiteVue.createApp({
       clearTimeout(hiddenTimer)
     }, 5000)
   },
-  wrapperMouseEnter() {
-
-  },
-  wrapperMouseLeave() {
-
-  },
+  wrapperMouseEnter() { },
+  wrapperMouseLeave() { },
   clickShow(e: MouseEvent) {
     this.hidden = !this.hidden
     e.preventDefault();
