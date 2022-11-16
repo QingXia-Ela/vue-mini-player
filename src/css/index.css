@@ -26,6 +26,7 @@ html {
 #CoreWrapper * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 #CoreWrapper.dragging {
   transition: none !important;
@@ -35,8 +36,8 @@ html {
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  padding-bottom: 20px;
+  padding: 20px;
+  padding-top: 10px;
 }
 #CoreWrapper .operate_box .left_img {
   width: 85px;
@@ -46,6 +47,9 @@ html {
   -webkit-user-select: none;
 }
 #CoreWrapper .operate_box .right_operate {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
   flex: 1;
   height: 100%;
   padding-left: 10px;
@@ -59,8 +63,42 @@ html {
   justify-content: space-between;
   align-items: center;
 }
+#CoreWrapper .operate_box .right_operate .operation_button .iconfont {
+  font-size: 22px;
+}
+#CoreWrapper .operate_box .slider {
+  position: relative;
+  height: 20px;
+  cursor: pointer;
+}
+#CoreWrapper .operate_box .slider .track,
+#CoreWrapper .operate_box .slider .active_track {
+  position: absolute;
+  top: 7px;
+  height: 4px;
+}
+#CoreWrapper .operate_box .slider .track {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+#CoreWrapper .operate_box .slider .active_track {
+  width: 30%;
+  background-color: #fff;
+}
+#CoreWrapper .operate_box .slider .thumb {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 4px;
+  left: 30%;
+  background-color: #fff;
+  border-radius: 50vh;
+}
 #CoreWrapper .left_arrow,
 #CoreWrapper .right_arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   top: -1px;
   width: 30px;
@@ -70,6 +108,10 @@ html {
   border-top: 1px solid hsla(0, 0%, 100%, 0.49411765);
   transition: transform 0.3s;
   cursor: pointer;
+}
+#CoreWrapper .left_arrow .iconfont,
+#CoreWrapper .right_arrow .iconfont {
+  font-size: 20px;
 }
 #CoreWrapper .left_arrow {
   border-top-left-radius: 10px;

@@ -13,17 +13,31 @@
   <div v-scope id="CoreWrapper" v-wrapper-adsorb @mouseup="wrapperMouseUp" @mouseenter="wrapperMouseEnter"
     @mouseleave="wrapperMouseLeave"
     :class="`${dragging ? 'dragging': ''} ${onRight ? 'right' : 'left'} ${hidden ? 'hidden' : ''}`">
-    <div class="left_arrow" @click="clickShow"></div>
+    <div class="left_arrow" @click="clickShow">
+      <i class="iconfont icon-24gl-arrowLeft3"></i>
+    </div>
     <div class="operate_box" v-draggable="#CoreWrapper" @mousedown="wrapperMouseDown">
       <div class="left_img" style="background-image: url(./src/assets/icon.jpg);"></div>
       <div class="right_operate">
-        <div class="song_name">111</div>
+        <div class="song_name">Radiant</div>
         <div class="operation_button">
-
+          <!-- <i class="iconfont icon-24gl-volumeZero"></i> -->
+          <i class="iconfont icon-24gl-volumeMiddle"></i>
+          <i class="iconfont icon-24gl-previousCircle"></i>
+          <i class="iconfont icon-24gl-playCircle"></i>
+          <i class="iconfont icon-24gl-nextCircle"></i>
+          <i class="iconfont icon-24gl-shuffle"></i>
+        </div>
+        <div class="slider" @click.stop.prevent>
+          <div class="track"></div>
+          <div class="active_track"></div>
+          <div class="thumb"></div>
         </div>
       </div>
     </div>
-    <div class="right_arrow" @click="clickShow"></div>
+    <div class="right_arrow" @click="clickShow">
+      <i class="iconfont icon-24gl-arrowRight3"></i>
+    </div>
     <div class="list_box"></div>
   </div>
 </body>

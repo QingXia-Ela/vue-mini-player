@@ -28,6 +28,7 @@ html {
   * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
   }
 }
 
@@ -41,8 +42,8 @@ html {
     flex: 1;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    padding-bottom: 20px;
+    padding: 20px;
+    padding-top: 10px;
 
     .left_img {
       width: 85px;
@@ -53,6 +54,9 @@ html {
     }
 
     .right_operate {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
       flex: 1;
       height: 100%;
       padding-left: 10px;
@@ -66,12 +70,52 @@ html {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .iconfont {
+          font-size: 22px;
+        }
+      }
+    }
+
+    .slider {
+      position: relative;
+      height: 20px;
+      cursor: pointer;
+
+      .track,
+      .active_track {
+        position: absolute;
+        top: 7px;
+        height: 4px;
+      }
+
+      .track {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .active_track {
+        width: 30%;
+        background-color: #fff;
+      }
+
+      .thumb {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        top: 4px;
+        left: 30%;
+        background-color: #fff;
+        border-radius: 50vh;
       }
     }
   }
 
   .left_arrow,
   .right_arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     top: -1px;
     width: 30px;
@@ -81,6 +125,10 @@ html {
     border-top: 1px solid hsla(0, 0%, 100%, .4941176471);
     transition: transform .3s;
     cursor: pointer;
+
+    .iconfont {
+      font-size: 20px;
+    }
   }
 
   .left_arrow {
