@@ -1,4 +1,5 @@
 import MusicPlayerCore from './core'
+import Draggable from './directives/draggable'
 import './css/index.css'
 
 const store = PetiteVue.reactive(new MusicPlayerCore({}))
@@ -8,18 +9,13 @@ window._PlayerCore = store
 const _p = document.createElement('div')
 _p.setAttribute('id', '_player')
 
-_p.innerHTML = `
-<div v-scope>
-  <p>{{ count }}</p>
-  <p>{{ plusOne }}</p>
-  <div>{{ store.SongIdList }}</div>
-  <button @click="increment">increment</button>
-</div>
-`
+_p.innerHTML = ``
 
-PetiteVue.createApp({
+const app = PetiteVue.createApp({
   store
-}).mount()
+})
+app.directive('draggable', Draggable)
+app.mount()
 
 setTimeout(() => {
   store.AppendSong({ name: 'test', id: 0, src: '' })
