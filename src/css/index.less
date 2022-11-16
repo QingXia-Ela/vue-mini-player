@@ -1,15 +1,23 @@
+html {
+  width: 100%;
+  height: 100%;
+  background-image: url(../assets/bg.jpg);
+  background-size: cover;
+}
+
 #CoreWrapper {
+  display: flex;
   font-family: 'Microsoft Yahei', 'Times New Roman', Times, serif;
   bottom: 0;
   right: 0;
   position: fixed;
-  width: 300px;
+  width: 360px;
   height: 120px;
   color: #fff;
   background-image: linear-gradient(90deg, rgba(99, 99, 99, .1), rgba(99, 99, 99, .1) 1px, transparent 0, transparent), linear-gradient(90deg, hsla(0, 0%, 100%, .1) -20%, transparent 15%), linear-gradient(0deg, hsla(0, 0%, 100%, .1), transparent 25%);
   background-color: rgba(0, 0, 0, .6);
   border-top: 1px solid hsla(0, 0%, 100%, .4941176471);
-  border-left: 1px solid hsla(0, 0%, 100%, .4941176471);
+  border-radius: 10px;
   box-shadow: 0 0 10px 5px hsla(0, 0%, 100%, .15);
   transition: background-color .5s, box-shadow .5s, left .4s, transform .4s;
 
@@ -28,16 +36,50 @@
     transition: none !important;
   }
 
+  .operate_box {
+    flex: 1;
+  }
+
+  .left_arrow,
+  .right_arrow {
+    position: relative;
+    top: -1px;
+    width: 30px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: linear-gradient(90deg, rgba(99, 99, 99, .1), rgba(99, 99, 99, .1) 1px, transparent 0, transparent), linear-gradient(90deg, hsla(0, 0%, 100%, .1) -20%, transparent 15%), linear-gradient(0deg, hsla(0, 0%, 100%, .1), transparent 25%);
+    border-top: 1px solid hsla(0, 0%, 100%, .4941176471);
+    transition: transform .3s;
+    cursor: pointer;
+  }
+
+  .left_arrow {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left: 1px solid hsla(0, 0%, 100%, .4941176471);
+  }
+
+  .right_arrow {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-right: 1px solid hsla(0, 0%, 100%, .4941176471);
+  }
+
+  &.left {
+    transform: translateX(-30px);
+  }
+
+  &.right {
+    transform: translateX(30px);
+  }
+
   &.hidden {
-
-
     &.left {
-      transform: translateX(-80%);
+      transform: translateX(calc(-100% + 30px));
     }
 
     &.right {
-      transform: translateX(80%);
-
+      transform: translateX(calc(100% - 30px));
     }
   }
 }

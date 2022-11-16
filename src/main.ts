@@ -41,10 +41,14 @@ const app = PetiteVue.createApp({
     }, 5000)
   },
   wrapperMouseEnter() {
-    this.hidden = false
+
   },
   wrapperMouseLeave() {
 
+  },
+  clickShow(e: MouseEvent) {
+    this.hidden = !this.hidden
+    e.preventDefault();
   }
 })
 app.directive('draggable', Draggable)
