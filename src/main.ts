@@ -1,6 +1,7 @@
 import MusicPlayerCore from './core'
 import Draggable from './directives/draggable'
 import './css/index.css'
+import './assets/fonts/iconfont/iconfont.css'
 import Adsorb from './directives/wrapperAdsorb'
 
 const id = 'CoreWrapper'

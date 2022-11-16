@@ -14,7 +14,15 @@
     @mouseleave="wrapperMouseLeave"
     :class="`${dragging ? 'dragging': ''} ${onRight ? 'right' : 'left'} ${hidden ? 'hidden' : ''}`">
     <div class="left_arrow" @click="clickShow"></div>
-    <div class="operate_box" v-draggable="#CoreWrapper" @mousedown="wrapperMouseDown"></div>
+    <div class="operate_box" v-draggable="#CoreWrapper" @mousedown="wrapperMouseDown">
+      <div class="left_img" style="background-image: url(./src/assets/icon.jpg);"></div>
+      <div class="right_operate">
+        <div class="song_name">111</div>
+        <div class="operation_button">
+
+        </div>
+      </div>
+    </div>
     <div class="right_arrow" @click="clickShow"></div>
     <div class="list_box"></div>
   </div>

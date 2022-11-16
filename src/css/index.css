@@ -10,7 +10,7 @@ html {
   bottom: 0;
   right: 0;
   position: fixed;
-  width: 360px;
+  width: 400px;
   height: 120px;
   color: #fff;
   background-image: linear-gradient(90deg, rgba(99, 99, 99, 0.1), rgba(99, 99, 99, 0.1) 1px, transparent 0, transparent), linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) -20%, transparent 15%), linear-gradient(0deg, hsla(0, 0%, 100%, 0.1), transparent 25%);
@@ -31,7 +31,33 @@ html {
   transition: none !important;
 }
 #CoreWrapper .operate_box {
+  display: flex;
   flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  padding-bottom: 20px;
+}
+#CoreWrapper .operate_box .left_img {
+  width: 85px;
+  height: 85px;
+  background-size: cover;
+  user-select: none;
+  -webkit-user-select: none;
+}
+#CoreWrapper .operate_box .right_operate {
+  flex: 1;
+  height: 100%;
+  padding-left: 10px;
+  user-select: none;
+}
+#CoreWrapper .operate_box .right_operate .song_name {
+  font-weight: 700;
+}
+#CoreWrapper .operate_box .right_operate .operation_button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 #CoreWrapper .left_arrow,
 #CoreWrapper .right_arrow {
@@ -62,8 +88,8 @@ html {
   transform: translateX(30px);
 }
 #CoreWrapper.hidden.left {
-  transform: translateX(calc(-100% + 30px));
+  transform: translateX(calc(0% + 30px));
 }
 #CoreWrapper.hidden.right {
-  transform: translateX(calc(100% - 30px));
+  transform: translateX(calc(0% - 30px));
 }
