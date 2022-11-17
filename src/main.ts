@@ -117,6 +117,7 @@ const app = PetiteVue.createApp({
     this.slidingTime = this.duration * p
   },
   jumpTime(e: MouseEvent) {
+    if (isNaN(this.store.e.duration)) return
     const slider = e.currentTarget
     // @ts-expect-error
     let p = e.offsetX / slider.clientWidth
