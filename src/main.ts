@@ -29,16 +29,21 @@ const app = PetiteVue.createApp({
   showupPrecentage: 0,
   showList: false,
   sliding: false,
+  slidingTime: 0,
   onMounted() {
     console.log('mounted');
     const { e } = store
 
     e.addEventListener('timeupdate', () => {
-      this.CurrentTime = e.currentTime
+      if (!this.sliding) {
+        this.CurrentTime = e.currentTime
+        this._UpdateShowPrecentage(this.CurrentTime / this.duration)
+      }
     })
 
     e.addEventListener('loadedmetadata', () => {
-      this.duration = e.duration
+      if (!this.sliding)
+        this.duration = e.duration
     })
   },
   get currentPrecentage() {
@@ -54,7 +59,7 @@ const app = PetiteVue.createApp({
     return execSecTime(this.duration)
   },
   get mediaCurrentTime() {
-    return execSecTime(this.CurrentTime)
+    return this.sliding ? execSecTime(this.slidingTime) : execSecTime(this.CurrentTime)
   },
   get songInfoList() {
     const res = []
@@ -109,21 +114,26 @@ const app = PetiteVue.createApp({
     if (p > 1) p = 1
     else if (p < 0) p = 0
     this.showupPrecentage = (p * 100).toFixed(2)
+    this.slidingTime = this.duration * p
   },
   jumpTime(e: MouseEvent) {
     const slider = e.currentTarget
     // @ts-expect-error
-    const p = e.offsetX / slider.clientWidth
+    let p = e.offsetX / slider.clientWidth
     this._UpdateShowPrecentage(p)
+    this.sliding = true
     const slide = (e: MouseEvent) => {
       const s = document.getElementById(id)
       // @ts-expect-error
-      let p = e.clientX - s.offsetLeft - slider.clientWidth
+      p = e.clientX - s.offsetLeft - slider.clientWidth
       p += this.onRight ? 25 : 85
       // @ts-expect-error
       this._UpdateShowPrecentage(p / slider.clientWidth)
     }
-    function cs() {
+    const cs = () => {
+      // @ts-expect-error
+      this.store.e.currentTime = (p / slider.clientWidth) * this.duration
+      this.sliding = false
       window.removeEventListener('mousemove', slide)
       window.removeEventListener('mouseup', cs)
     }

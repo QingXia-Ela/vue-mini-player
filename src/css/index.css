@@ -65,6 +65,7 @@ html {
 }
 #CoreWrapper .operate_box .right_operate .song_name .name {
   width: 120px;
+  padding-right: 1px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -88,7 +89,7 @@ html {
 #CoreWrapper .operate_box .slider .track,
 #CoreWrapper .operate_box .slider .active_track {
   position: absolute;
-  height: 5px;
+  height: 6px;
   cursor: pointer;
 }
 #CoreWrapper .operate_box .slider .track {

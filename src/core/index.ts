@@ -28,7 +28,7 @@ class MusicPlayerCore {
 
   constructor({ ...props }: MusicPlayerCoreProps) {
     this.e = document.createElement('audio')
-    this.e.volume = 0.3
+    this.e.volume = 0.1
     this.SongIdList = []
     this.SongIdMap = {}
     this.PlayMode = 1
