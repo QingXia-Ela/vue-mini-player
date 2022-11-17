@@ -42,7 +42,8 @@
     <div class="right_arrow" @click="clickShow">
       <i class="iconfont icon-24gl-arrowRight3"></i>
     </div>
-    <div class="list_box player_module">
+    <div class="show_list_button" @click="switchListShow"></div>
+    <div :class="`list_box player_module ${showList ? 'show' : ''}`">
       <div class="song_item current">
         <div class="title">Radiant</div>
         <div class="function_button">

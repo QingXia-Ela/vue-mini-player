@@ -25,6 +25,7 @@ const app = PetiteVue.createApp({
   hover: false,
   currentTime: 0,
   showupPrecentage: 0,
+  showList: false,
   get currentPrecentage() {
     return (this.currentTime * 100).toFixed(2)
   },
@@ -43,6 +44,7 @@ const app = PetiteVue.createApp({
     }
     hiddenTimer = setTimeout(() => {
       this.hidden = true
+      this.showList = false
       clearTimeout(hiddenTimer)
     }, 5000)
   },
@@ -78,6 +80,9 @@ const app = PetiteVue.createApp({
     }
     window.addEventListener('mousemove', slide)
     window.addEventListener('mouseup', cs)
+  },
+  switchListShow() {
+    this.showList = !this.showList
   }
 })
 app.directive('draggable', Draggable)

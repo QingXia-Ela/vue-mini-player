@@ -39,7 +39,6 @@ html {
   align-items: center;
   width: 340px;
   padding: 20px;
-  padding-top: 10px;
 }
 #CoreWrapper .operate_box .left_img {
   width: 85px;
@@ -93,7 +92,7 @@ html {
   cursor: pointer;
 }
 #CoreWrapper .operate_box .slider .track {
-  top: 6px;
+  top: 10px;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -105,7 +104,7 @@ html {
   position: absolute;
   width: 10px;
   height: 10px;
-  top: 4px;
+  top: 8px;
   left: 30%;
   background-color: #fff;
   border-radius: 50vh;
@@ -151,14 +150,34 @@ html {
 #CoreWrapper.hidden.right {
   transform: translateX(calc(0% - 30px));
 }
+#CoreWrapper .show_list_button {
+  position: absolute;
+  left: 30px;
+  right: 0;
+  bottom: 0;
+  width: calc(100% - 60px);
+  height: 15px;
+  text-align: center;
+  opacity: 0;
+  background-image: linear-gradient(transparent 0%, transparent 70%, #fff 100%);
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+#CoreWrapper .show_list_button:hover {
+  opacity: 1;
+}
 #CoreWrapper .list_box {
   position: absolute;
-  top: 110%;
+  top: 100%;
   left: calc(30px + 2.5%);
   width: calc(95% - 60px);
-  max-height: 500px;
+  max-height: 250px;
   padding: 10px 0;
   background-color: hsla(0, 0%, 0%, 0.75);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, top 0.3s;
+  overflow: auto;
   /* webkit */
   /* firefox */
   scrollbar-width: none;
@@ -204,4 +223,9 @@ html {
 }
 #CoreWrapper .list_box .song_item:hover .function_button {
   opacity: 1;
+}
+#CoreWrapper .list_box.show {
+  top: 110%;
+  opacity: 1;
+  pointer-events: inherit;
 }
