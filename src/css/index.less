@@ -5,6 +5,14 @@ html {
   background-size: cover;
 }
 
+.player_module {
+  background-image: linear-gradient(90deg, rgba(99, 99, 99, .1), rgba(99, 99, 99, .1) 1px, transparent 0, transparent), linear-gradient(90deg, hsla(0, 0%, 100%, .1) -20%, transparent 15%), linear-gradient(0deg, hsla(0, 0%, 100%, .1), transparent 25%);
+  background-color: rgba(0, 0, 0, .6);
+  border-top: 1px solid hsla(0, 0%, 100%, .4941176471);
+  border-radius: 10px;
+  box-shadow: 0 0 10px 5px hsla(0, 0%, 100%, .15);
+}
+
 #CoreWrapper {
   display: flex;
   font-family: 'Microsoft Yahei', 'Times New Roman', Times, serif;
@@ -14,11 +22,6 @@ html {
   width: 400px;
   height: 120px;
   color: #fff;
-  background-image: linear-gradient(90deg, rgba(99, 99, 99, .1), rgba(99, 99, 99, .1) 1px, transparent 0, transparent), linear-gradient(90deg, hsla(0, 0%, 100%, .1) -20%, transparent 15%), linear-gradient(0deg, hsla(0, 0%, 100%, .1), transparent 25%);
-  background-color: rgba(0, 0, 0, .6);
-  border-top: 1px solid hsla(0, 0%, 100%, .4941176471);
-  border-radius: 10px;
-  box-shadow: 0 0 10px 5px hsla(0, 0%, 100%, .15);
   transition: background-color .5s, box-shadow .5s, left .4s, transform .4s;
 
   &:hover {
@@ -39,9 +42,9 @@ html {
 
   .operate_box {
     display: flex;
-    flex: 1;
     justify-content: center;
     align-items: center;
+    width: 340px;
     padding: 20px;
     padding-top: 10px;
 
@@ -63,7 +66,22 @@ html {
       user-select: none;
 
       .song_name {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
         font-weight: 700;
+
+        .name {
+          width: 120px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        .time {
+          font-size: 13px;
+        }
       }
 
       .operation_button {
@@ -73,6 +91,7 @@ html {
 
         .iconfont {
           font-size: 22px;
+          cursor: pointer;
         }
       }
     }
@@ -80,16 +99,16 @@ html {
     .slider {
       position: relative;
       height: 20px;
-      cursor: pointer;
 
       .track,
       .active_track {
         position: absolute;
-        top: 7px;
-        height: 4px;
+        height: 5px;
+        cursor: pointer;
       }
 
       .track {
+        top: 6px;
         width: 100%;
         background-color: rgba(255, 255, 255, 0.3);
       }
@@ -158,6 +177,72 @@ html {
 
     &.right {
       transform: translateX(calc(0% - 30px));
+    }
+  }
+
+  .list_box {
+    position: absolute;
+    top: 110%;
+    left: calc(30px + 2.5%);
+    width: calc(95% - 60px);
+    max-height: 500px;
+    padding: 10px 0;
+    background-color: hsla(0, 0, 0, 0.75);
+
+    /* webkit */
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    /* firefox */
+    scrollbar-width: none;
+    /* ie */
+    -ms-overflow-style: none;
+
+    .song_item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      height: 45px;
+      padding: 0 20px;
+      transition: background-color .3s;
+
+      .title {
+        font-weight: 700;
+      }
+
+      .function_button {
+        opacity: 0;
+        transition: opacity .3s;
+        cursor: pointer;
+
+        .iconfont {
+          font-size: 20px;
+        }
+      }
+
+      &.current {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 3px;
+          height: 100%;
+          background-color: #fff;
+          box-shadow: 0 0 6px #fff;
+        }
+      }
+
+      &:hover {
+        background-color: hsla(0, 0%, 100%, .1333333333);
+
+        .function_button {
+          opacity: 1;
+        }
+      }
     }
   }
 }

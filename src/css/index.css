@@ -4,6 +4,13 @@ html {
   background-image: url(../assets/bg.jpg);
   background-size: cover;
 }
+.player_module {
+  background-image: linear-gradient(90deg, rgba(99, 99, 99, 0.1), rgba(99, 99, 99, 0.1) 1px, transparent 0, transparent), linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) -20%, transparent 15%), linear-gradient(0deg, hsla(0, 0%, 100%, 0.1), transparent 25%);
+  background-color: rgba(0, 0, 0, 0.6);
+  border-top: 1px solid hsla(0, 0%, 100%, 0.49411765);
+  border-radius: 10px;
+  box-shadow: 0 0 10px 5px hsla(0, 0%, 100%, 0.15);
+}
 #CoreWrapper {
   display: flex;
   font-family: 'Microsoft Yahei', 'Times New Roman', Times, serif;
@@ -13,11 +20,6 @@ html {
   width: 400px;
   height: 120px;
   color: #fff;
-  background-image: linear-gradient(90deg, rgba(99, 99, 99, 0.1), rgba(99, 99, 99, 0.1) 1px, transparent 0, transparent), linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) -20%, transparent 15%), linear-gradient(0deg, hsla(0, 0%, 100%, 0.1), transparent 25%);
-  background-color: rgba(0, 0, 0, 0.6);
-  border-top: 1px solid hsla(0, 0%, 100%, 0.49411765);
-  border-radius: 10px;
-  box-shadow: 0 0 10px 5px hsla(0, 0%, 100%, 0.15);
   transition: background-color 0.5s, box-shadow 0.5s, left 0.4s, transform 0.4s;
 }
 #CoreWrapper:hover {
@@ -33,9 +35,9 @@ html {
 }
 #CoreWrapper .operate_box {
   display: flex;
-  flex: 1;
   justify-content: center;
   align-items: center;
+  width: 340px;
   padding: 20px;
   padding-top: 10px;
 }
@@ -56,7 +58,20 @@ html {
   user-select: none;
 }
 #CoreWrapper .operate_box .right_operate .song_name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   font-weight: 700;
+}
+#CoreWrapper .operate_box .right_operate .song_name .name {
+  width: 120px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+#CoreWrapper .operate_box .right_operate .song_name .time {
+  font-size: 13px;
 }
 #CoreWrapper .operate_box .right_operate .operation_button {
   display: flex;
@@ -65,19 +80,20 @@ html {
 }
 #CoreWrapper .operate_box .right_operate .operation_button .iconfont {
   font-size: 22px;
+  cursor: pointer;
 }
 #CoreWrapper .operate_box .slider {
   position: relative;
   height: 20px;
-  cursor: pointer;
 }
 #CoreWrapper .operate_box .slider .track,
 #CoreWrapper .operate_box .slider .active_track {
   position: absolute;
-  top: 7px;
-  height: 4px;
+  height: 5px;
+  cursor: pointer;
 }
 #CoreWrapper .operate_box .slider .track {
+  top: 6px;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -134,4 +150,58 @@ html {
 }
 #CoreWrapper.hidden.right {
   transform: translateX(calc(0% - 30px));
+}
+#CoreWrapper .list_box {
+  position: absolute;
+  top: 110%;
+  left: calc(30px + 2.5%);
+  width: calc(95% - 60px);
+  max-height: 500px;
+  padding: 10px 0;
+  background-color: hsla(0, 0%, 0%, 0.75);
+  /* webkit */
+  /* firefox */
+  scrollbar-width: none;
+  /* ie */
+  -ms-overflow-style: none;
+}
+#CoreWrapper .list_box::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+#CoreWrapper .list_box .song_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  height: 45px;
+  padding: 0 20px;
+  transition: background-color 0.3s;
+}
+#CoreWrapper .list_box .song_item .title {
+  font-weight: 700;
+}
+#CoreWrapper .list_box .song_item .function_button {
+  opacity: 0;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+#CoreWrapper .list_box .song_item .function_button .iconfont {
+  font-size: 20px;
+}
+#CoreWrapper .list_box .song_item.current::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 6px #fff;
+}
+#CoreWrapper .list_box .song_item:hover {
+  background-color: hsla(0, 0%, 100%, 0.13333333);
+}
+#CoreWrapper .list_box .song_item:hover .function_button {
+  opacity: 1;
 }

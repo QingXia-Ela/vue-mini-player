@@ -23,6 +23,11 @@ const app = PetiteVue.createApp({
   onRight: true,
   hidden: true,
   hover: false,
+  currentTime: 0,
+  showupPrecentage: 0,
+  get currentPrecentage() {
+    return (this.currentTime * 100).toFixed(2)
+  },
   /** wrapper */
   wrapperMouseDown() {
     this.dragging = true
@@ -46,6 +51,33 @@ const app = PetiteVue.createApp({
   clickShow(e: MouseEvent) {
     this.hidden = !this.hidden
     e.preventDefault();
+  },
+  _UpdateShowPrecentage(p: any) {
+    if (p > 1) p = 1
+    else if (p < 0) p = 0
+    this.showupPrecentage = (p * 100).toFixed(2)
+  },
+  jumpTime(e: MouseEvent) {
+    const slider = e.currentTarget
+    // @ts-expect-error
+    const p = e.offsetX / slider.clientWidth
+    this._UpdateShowPrecentage(p)
+    const slide = (e: MouseEvent) => {
+      const s = document.getElementById(id)
+      // @ts-expect-error
+      console.log(s.offsetLeft);
+      // @ts-expect-error
+      let p = e.clientX - s.offsetLeft - slider.clientWidth
+      p += this.onRight ? 25 : 85
+      // @ts-expect-error
+      this._UpdateShowPrecentage(p / slider.clientWidth)
+    }
+    function cs() {
+      window.removeEventListener('mousemove', slide)
+      window.removeEventListener('mouseup', cs)
+    }
+    window.addEventListener('mousemove', slide)
+    window.addEventListener('mouseup', cs)
   }
 })
 app.directive('draggable', Draggable)

@@ -67,7 +67,7 @@ const Draggable = (ctx: any) => {
   }
 
   ctx.el.addEventListener('mousedown', (e: MouseEvent) => {
-    dragging = true, cx = e.offsetX, cy = e.offsetY
+    dragging = true, cx = e.clientX - ele.offsetLeft, cy = e.clientY - ele.offsetTop
     function cs() {
       dragging = false
       clearState()
