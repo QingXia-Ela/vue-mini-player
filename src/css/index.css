@@ -144,12 +144,6 @@ html {
 #CoreWrapper.right {
   transform: translateX(30px);
 }
-#CoreWrapper.hidden.left {
-  transform: translateX(calc(0% + 30px));
-}
-#CoreWrapper.hidden.right {
-  transform: translateX(calc(0% - 30px));
-}
 #CoreWrapper .show_list_button {
   position: absolute;
   left: 30px;

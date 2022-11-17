@@ -24,14 +24,17 @@ class MusicPlayerCore {
   public IsPlaying: boolean
   public SongIdMap: { [key: number]: SingleSongProps }
   public PlayMode: PlayModeType
+  public IsMute: boolean
 
   constructor({ ...props }: MusicPlayerCoreProps) {
     this.e = document.createElement('audio')
+    this.e.volume = 0.3
     this.SongIdList = []
     this.SongIdMap = {}
     this.PlayMode = 1
     this.CurrentSongId = -1
     this.IsPlaying = false
+    this.IsMute = false
   }
 
   private _AppendSongByIndex(song: SingleSongProps, index: number) {
@@ -89,7 +92,6 @@ class MusicPlayerCore {
           }
         }
       }
-      Object
       delete this.SongIdMap[p.id]
       this.SongIdList.splice(this.SongIdList.indexOf(p.id), 1)
     }
@@ -170,26 +172,46 @@ class MusicPlayerCore {
    * @param id Song's id.
    */
   PlaySelectSong(id: number) {
+    console.log(id);
+
     const s = this.SongIdMap[id]
     if (this.SongIdList.indexOf(id) === -1) logWarn(`Song's id: '${id}' is not in the id list or it's not corrent number.`)
     if (s) {
       this.e.src = s.src
       this.CurrentSongId = id
     }
+    this.Play()
   }
 
   NextSong() {
     const p = this.SongIdList.indexOf(this.CurrentSongId)
     let pos = 0
-    if (p !== this.SongIdList.length - 1) pos = p
+    if (p !== this.SongIdList.length - 1) pos = p + 1
     this.PlaySelectSong(this.SongIdList[pos])
   }
 
   PrevSong() {
     const p = this.SongIdList.indexOf(this.CurrentSongId)
     let pos = this.SongIdList.length - 1
-    if (p !== 0) pos = p
+    if (p !== 0) pos = p - 1
     this.PlaySelectSong(this.SongIdList[pos])
+  }
+
+  SwitchMute() {
+    this.IsMute = !this.e.muted
+    this.e.muted = this.IsMute
+  }
+
+  SwitchPlayMode(m: PlayModeType | MouseEvent) {
+    let f = 1
+    if (typeof m === 'object') {
+      // @ts-expect-error
+      f = parseInt(m.currentTarget.getAttribute('data-mode-id'))
+    }
+    if (f === 4) f = 1
+    else f++
+    // @ts-expect-error
+    this.PlayMode = f
   }
 
   /**

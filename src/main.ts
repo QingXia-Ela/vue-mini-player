@@ -6,7 +6,7 @@ import Adsorb from './directives/wrapperAdsorb'
 
 const id = 'CoreWrapper'
 
-const store = PetiteVue.reactive(new MusicPlayerCore({}))
+const store: MusicPlayerCore = PetiteVue.reactive(new MusicPlayerCore({}))
 /** @ts-ignore */
 window._PlayerCore = store
 
@@ -29,11 +29,20 @@ const app = PetiteVue.createApp({
   get currentPrecentage() {
     return (this.currentTime * 100).toFixed(2)
   },
+  clearHiddenTimer() {
+    clearTimeout(hiddenTimer)
+  },
+  startTimer() {
+    hiddenTimer = setTimeout(() => {
+      this.hidden = true
+      this.showList = false
+      this.clearHiddenTimer()
+    }, 8000)
+  },
   /** wrapper */
   wrapperMouseDown() {
     this.dragging = true
     this.hidden = false
-    clearTimeout(hiddenTimer)
   },
   wrapperMouseUp() {
     this.dragging = false
@@ -42,17 +51,22 @@ const app = PetiteVue.createApp({
       if (e.offsetLeft > window.innerWidth / 2) this.onRight = true
       else this.onRight = false
     }
-    hiddenTimer = setTimeout(() => {
-      this.hidden = true
-      this.showList = false
-      clearTimeout(hiddenTimer)
-    }, 5000)
   },
-  wrapperMouseEnter() { },
-  wrapperMouseLeave() { },
+  wrapperMouseEnter() {
+    this.hover = true
+    this.clearHiddenTimer()
+  },
+  wrapperMouseLeave() {
+    this.hover = false
+    this.clearHiddenTimer()
+  },
   clickShow(e: MouseEvent) {
+    clearTimeout(hiddenTimer)
     this.hidden = !this.hidden
+    if (this.hidden)
+      this.showList = false
     e.preventDefault();
+    this.startTimer()
   },
   _UpdateShowPrecentage(p: any) {
     if (p > 1) p = 1
@@ -66,8 +80,6 @@ const app = PetiteVue.createApp({
     this._UpdateShowPrecentage(p)
     const slide = (e: MouseEvent) => {
       const s = document.getElementById(id)
-      // @ts-expect-error
-      console.log(s.offsetLeft);
       // @ts-expect-error
       let p = e.clientX - s.offsetLeft - slider.clientWidth
       p += this.onRight ? 25 : 85
@@ -83,6 +95,16 @@ const app = PetiteVue.createApp({
   },
   switchListShow() {
     this.showList = !this.showList
+  },
+  async CorePlay() {
+    try {
+      await store.Play()
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  CorePause() {
+    store.Pause()
   }
 })
 app.directive('draggable', Draggable)
@@ -91,7 +113,8 @@ app.directive('wrapper-adsorb', Adsorb)
 app.mount()
 
 setTimeout(() => {
-  store.AppendSong({ name: 'test', id: 0, src: '' })
-}, 1000);
+  store.AppendSong({ name: 'test', id: 0, src: 'https://shiinafan.top/static/sample.mp3' })
+  store.AppendSong({ name: 'olk', id: 1, src: 'https://shiinafan.top/static/sample2.mp3' })
+});
 
 // document.body.appendChild(_p)
