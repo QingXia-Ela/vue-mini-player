@@ -29,12 +29,21 @@ const app = PetiteVue.createApp({
   get currentPrecentage() {
     return (this.currentTime * 100).toFixed(2)
   },
+  get currentSongInfo() {
+    const s = store.SongIdMap[store.CurrentSongId]
+    return s ? s : {
+      name: '_(:з」∠)_'
+    }
+  },
   clearHiddenTimer() {
     clearTimeout(hiddenTimer)
   },
   startTimer() {
+    if (hiddenTimer)
+      this.clearHiddenTimer()
     hiddenTimer = setTimeout(() => {
       this.hidden = true
+      this.hover = false
       this.showList = false
       this.clearHiddenTimer()
     }, 8000)
@@ -58,7 +67,7 @@ const app = PetiteVue.createApp({
   },
   wrapperMouseLeave() {
     this.hover = false
-    this.clearHiddenTimer()
+    this.startTimer()
   },
   clickShow(e: MouseEvent) {
     clearTimeout(hiddenTimer)
@@ -113,8 +122,9 @@ app.directive('wrapper-adsorb', Adsorb)
 app.mount()
 
 setTimeout(() => {
-  store.AppendSong({ name: 'test', id: 0, src: 'https://shiinafan.top/static/sample.mp3' })
+  store.AppendSong({ name: 'Infected', id: 0, src: 'https://shiinafan.top/static/sample.mp3' })
   store.AppendSong({ name: 'olk', id: 1, src: 'https://shiinafan.top/static/sample2.mp3' })
+  store.AppendSong({ name: 'Untitled World', id: 2, src: 'https://shiinafan.top/static/sample3.mp3' })
 });
 
 // document.body.appendChild(_p)
