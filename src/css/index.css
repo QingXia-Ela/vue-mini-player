@@ -197,7 +197,7 @@ html {
   transition: background-color 0.3s;
 }
 #CoreWrapper .list_box .song_item .title {
-  width: 90%;
+  width: 80%;
   font-weight: 700;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -205,12 +205,14 @@ html {
   user-select: none;
 }
 #CoreWrapper .list_box .song_item .function_button {
+  display: flex;
   opacity: 0;
   transition: opacity 0.3s;
   cursor: pointer;
 }
 #CoreWrapper .list_box .song_item .function_button .iconfont {
   font-size: 20px;
+  padding: 0 4px;
 }
 #CoreWrapper .list_box .song_item.current::before {
   content: "";

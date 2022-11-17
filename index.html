@@ -58,7 +58,8 @@
         @dblclick="CorePlaySelectSong(i.id)">
         <div class="title">{{ i.name }}</div>
         <div class="function_button">
-          <i class="iconfont icon-24gl-trash2"></i>
+          <i class="iconfont icon-24gl-playCircle" @click="store.PlaySelectSong(i.id)"></i>
+          <i class="iconfont icon-24gl-trash2" @click="store.RemoveSong(i.id)"></i>
         </div>
       </div>
     </div>
