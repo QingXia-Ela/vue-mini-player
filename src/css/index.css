@@ -195,7 +195,12 @@ html {
   transition: background-color 0.3s;
 }
 #CoreWrapper .list_box .song_item .title {
+  width: 90%;
   font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  user-select: none;
 }
 #CoreWrapper .list_box .song_item .function_button {
   opacity: 0;

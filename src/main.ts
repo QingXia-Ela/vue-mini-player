@@ -3,6 +3,7 @@ import Draggable from './directives/draggable'
 import './css/index.css'
 import './assets/fonts/iconfont/iconfont.css'
 import Adsorb from './directives/wrapperAdsorb'
+import execSecTime from './utils/execSecTime'
 
 const id = 'CoreWrapper'
 
@@ -24,8 +25,22 @@ const app = PetiteVue.createApp({
   hidden: true,
   hover: false,
   currentTime: 0,
+  duration: 0,
   showupPrecentage: 0,
   showList: false,
+  sliding: false,
+  onMounted() {
+    console.log('mounted');
+    const { e } = store
+
+    e.addEventListener('timeupdate', () => {
+      this.CurrentTime = e.currentTime
+    })
+
+    e.addEventListener('loadedmetadata', () => {
+      this.duration = e.duration
+    })
+  },
   get currentPrecentage() {
     return (this.currentTime * 100).toFixed(2)
   },
@@ -34,6 +49,19 @@ const app = PetiteVue.createApp({
     return s ? s : {
       name: '_(:з」∠)_'
     }
+  },
+  get mediaDuration() {
+    return execSecTime(this.duration)
+  },
+  get mediaCurrentTime() {
+    return execSecTime(this.CurrentTime)
+  },
+  get songInfoList() {
+    const res = []
+    for (const i of store.SongIdList) {
+      res.push(store.SongIdMap[i])
+    }
+    return res
   },
   clearHiddenTimer() {
     clearTimeout(hiddenTimer)
@@ -114,6 +142,9 @@ const app = PetiteVue.createApp({
   },
   CorePause() {
     store.Pause()
+  },
+  CorePlaySelectSong(id: number) {
+    store.PlaySelectSong(id)
   }
 })
 app.directive('draggable', Draggable)

@@ -11,6 +11,7 @@
 <body>
   <div id="app"></div>
   <div v-scope id="CoreWrapper" v-wrapper-adsorb @mouseup="wrapperMouseUp" @mousedown="clearHiddenTimer"
+    @vue:mounted="onMounted"
     :class="`player_module ${dragging ? 'dragging': ''} ${onRight ? 'right' : 'left'} ${hidden && !hover ? 'hidden' : ''}`">
     <div class="left_arrow" @click="clickShow">
       <i class="iconfont icon-24gl-arrowLeft3"></i>
@@ -21,7 +22,7 @@
       <div class="right_operate">
         <div class="song_name" v-draggable="#CoreWrapper">
           <span class="name">{{ currentSongInfo.name }}</span>
-          <span class="time">00:00/00:00</span>
+          <span class="time">{{ mediaCurrentTime }}/{{ mediaDuration }}</span>
         </div>
         <div class="operation_button">
           <!-- <i class="iconfont icon-24gl-volumeZero"></i> -->
@@ -53,8 +54,9 @@
     <div class="show_list_button" @click="switchListShow"></div>
     <div :class="`list_box player_module ${showList ? 'show' : ''}`" @mouseenter="wrapperMouseEnter"
       @mouseleave="wrapperMouseLeave">
-      <div class="song_item current">
-        <div class="title">Radiant</div>
+      <div :class="`song_item ${i.id === store.CurrentSongId ? 'current' : ''}`" v-for="(i, index) in songInfoList"
+        @dblclick="CorePlaySelectSong(i.id)">
+        <div class="title">{{ i.name }}</div>
         <div class="function_button">
           <i class="iconfont icon-24gl-trash2"></i>
         </div>

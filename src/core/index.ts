@@ -172,8 +172,6 @@ class MusicPlayerCore {
    * @param id Song's id.
    */
   PlaySelectSong(id: number) {
-    console.log(id);
-
     const s = this.SongIdMap[id]
     if (this.SongIdList.indexOf(id) === -1) logWarn(`Song's id: '${id}' is not in the id list or it's not corrent number.`)
     if (s) {
