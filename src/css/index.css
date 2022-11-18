@@ -1,9 +1,3 @@
-html {
-  width: 100%;
-  height: 100%;
-  background-image: url(../assets/bg.jpg);
-  background-size: cover;
-}
 .player_module {
   background-image: linear-gradient(90deg, rgba(99, 99, 99, 0.1), rgba(99, 99, 99, 0.1) 1px, transparent 0, transparent), linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) -20%, transparent 15%), linear-gradient(0deg, hsla(0, 0%, 100%, 0.1), transparent 25%);
   background-color: rgba(0, 0, 0, 0.6);
@@ -197,6 +191,11 @@ html {
 #CoreWrapper .list_box::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+#CoreWrapper .list_box .empty_tips {
+  margin: 10px 0;
+  font-weight: 700;
+  text-align: center;
 }
 #CoreWrapper .list_box .song_item {
   display: flex;

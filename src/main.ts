@@ -16,9 +16,9 @@ import template from './constant/template'
   const _p = document.createElement('div')
 
   _p.setAttribute('id', 'CorePlayer')
-  _p.innerHTML += template
+  _p.innerHTML = template
 
-  document.body.appendChild(_p)
+  if (process.env.NODE_ENV === 'production') document.body.appendChild(_p)
 
   let hiddenTimer: number
 
@@ -108,7 +108,7 @@ import template from './constant/template'
         this.hover = false
         this.showList = false
         this.clearHiddenTimer()
-      }, 8000)
+      }, 8000) as unknown as number
     },
     /** wrapper */
     wrapperMouseDown() {
@@ -194,5 +194,5 @@ import template from './constant/template'
   app.directive('draggable', Draggable)
   /** wrapper directive */
   app.directive('wrapper-adsorb', Adsorb)
-  app.mount("#CorePlayer")
+  app.mount(process.env.NODE_ENV === 'development' ? undefined : "#CorePlayer")
 })()
