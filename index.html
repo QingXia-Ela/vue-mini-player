@@ -18,7 +18,9 @@
     </div>
     <div class="operate_box" @mousedown="wrapperMouseDown" @mouseenter="wrapperMouseEnter"
       @mouseleave="wrapperMouseLeave">
-      <div class="left_img" style="background-image: url(./src/assets/icon.jpg);"></div>
+      <div class="left_img"
+        :style="`background-image: url(${currentSongInfo.img ? currentSongInfo.img  : './src/assets/icon.jpg'});`">
+      </div>
       <div class="right_operate">
         <div class="song_name" v-draggable="#CoreWrapper">
           <span class="name">{{ currentSongInfo.name }}</span>

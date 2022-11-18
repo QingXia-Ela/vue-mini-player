@@ -31,7 +31,6 @@ const app = PetiteVue.createApp({
   sliding: false,
   slidingTime: 0,
   onMounted() {
-    console.log('mounted');
     const { e } = store
 
     e.addEventListener('timeupdate', () => {
@@ -44,6 +43,32 @@ const app = PetiteVue.createApp({
     e.addEventListener('loadedmetadata', () => {
       if (!this.sliding)
         this.duration = e.duration
+    })
+
+    this.store.e.addEventListener('ended', () => {
+      const { SongIdList, CurrentSongId, PlayMode } = this.store
+      const p = SongIdList.indexOf(CurrentSongId)
+      switch (PlayMode) {
+        case 1:
+          if (p !== SongIdList.length) store.NextSong()
+          break;
+        case 2:
+          store.NextSong()
+          break;
+        case 3:
+          store.Play()
+          break;
+        case 4:
+          let l = parseInt(SongIdList.length * Math.random() + '')
+          while (l === CurrentSongId) {
+            l = parseInt(SongIdList.length * Math.random() + '')
+          }
+          store.PlaySelectSong(SongIdList[l])
+          break;
+        default:
+          store.NextSong()
+          break;
+      }
     })
   },
   get currentPrecentage() {
@@ -123,10 +148,14 @@ const app = PetiteVue.createApp({
     let p = e.offsetX / slider.clientWidth
     this._UpdateShowPrecentage(p)
     this.sliding = true
+    // exec p 2 slider length
+    // @ts-expect-error
+    p *= slider.clientWidth
+
     const slide = (e: MouseEvent) => {
       const s = document.getElementById(id)
       // @ts-expect-error
-      p = e.clientX - s.offsetLeft - slider.clientWidth
+      p = (e.clientX - s.offsetLeft - slider.clientWidth)
       p += this.onRight ? 25 : 85
       // @ts-expect-error
       this._UpdateShowPrecentage(p / slider.clientWidth)
@@ -164,9 +193,20 @@ app.directive('wrapper-adsorb', Adsorb)
 app.mount()
 
 setTimeout(() => {
-  store.AppendSong({ name: 'Infected', id: 0, src: 'https://shiinafan.top/static/sample.mp3' })
-  store.AppendSong({ name: 'olk', id: 1, src: 'https://shiinafan.top/static/sample2.mp3' })
-  store.AppendSong({ name: 'Untitled World', id: 2, src: 'https://shiinafan.top/static/sample3.mp3' })
+  store.AppendSong({
+    name: 'Infected',
+    id: 0,
+    src: 'https://shiinafan.top/static/sample.mp3',
+    img: 'https://shiinafan.top/favicon.ico'
+  })
+  store.AppendSong({
+    name: 'olk', id: 1, src: 'https://shiinafan.top/static/sample2.mp3',
+    img: 'https://shiinafan.top/favicon.ico'
+  })
+  store.AppendSong({
+    name: 'Untitled World', id: 2, src: 'https://shiinafan.top/static/sample3.mp3',
+    img: 'https://shiinafan.top/favicon.ico'
+  })
 });
 
 // document.body.appendChild(_p)

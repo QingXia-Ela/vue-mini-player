@@ -44,6 +44,7 @@ html {
   width: 85px;
   height: 85px;
   background-size: cover;
+  background-position: center;
   user-select: none;
   -webkit-user-select: none;
 }
