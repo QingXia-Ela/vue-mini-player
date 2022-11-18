@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 3774908 */
+  font-family: "iconfont";
+  /* Project id 3774908 */
   src: url('iconfont.woff2?t=1668605060094') format('woff2'),
-       url('iconfont.woff?t=1668605060094') format('woff'),
-       url('iconfont.ttf?t=1668605060094') format('truetype');
+    url('iconfont.woff?t=1668605060094') format('woff');
 }
 
 .iconfont {
@@ -72,4 +72,3 @@
 .icon-24gl-arrowUp3:before {
   content: "\eb6d";
 }
-

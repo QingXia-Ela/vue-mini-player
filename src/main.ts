@@ -10,7 +10,7 @@ import template from './constant/template'
   const id = 'CoreWrapper'
 
   const store: MusicPlayerCore = PetiteVue.reactive(new MusicPlayerCore({}))
-  /** @ts-ignore */
+  // @ts-expect-error
   window._PlayerCore = store
 
   const _p = document.createElement('div')

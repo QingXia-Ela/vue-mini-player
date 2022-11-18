@@ -1,19 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Node",
-    "strict": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     "esModuleInterop": true,
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "skipLibCheck": true
+    "outDir": "build",
+    "strictNullChecks": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "downlevelIteration": true
   },
-  "include": ["src"]
+  "exclude": [
+    "build",
+    "examples",
+    "vite.config.ts"
+  ]
 }
