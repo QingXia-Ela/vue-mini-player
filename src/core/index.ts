@@ -173,7 +173,7 @@ class MusicPlayerCore {
    */
   PlaySelectSong(id: number) {
     const s = this.SongIdMap[id]
-    if (this.SongIdList.indexOf(id) === -1) logWarn(`Song's id: '${id}' is not in the id list or it's not corrent number.`)
+    if (this.SongIdList.indexOf(id) === -1) throwError(`Song's id: '${id}' is not in the id list or it's not corrent number.`)
     if (s) {
       this.e.src = s.src
       this.CurrentSongId = id
