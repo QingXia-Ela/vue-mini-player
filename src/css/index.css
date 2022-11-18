@@ -154,8 +154,11 @@ html {
 #CoreWrapper.right {
   transform: translateX(30px);
 }
+#CoreWrapper.hidden.left {
+  transform: translateX(calc(-100% + 30px));
+}
 #CoreWrapper.hidden.right {
-  transform: translateX(40px);
+  transform: translateX(calc(100% - 30px));
 }
 #CoreWrapper .show_list_button {
   position: absolute;

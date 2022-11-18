@@ -195,21 +195,4 @@ import template from './constant/template'
   /** wrapper directive */
   app.directive('wrapper-adsorb', Adsorb)
   app.mount("#CorePlayer")
-
-  setTimeout(() => {
-    store.AppendSong({
-      name: 'Infected',
-      id: 0,
-      src: 'https://shiinafan.top/static/sample.mp3',
-      img: 'https://shiinafan.top/favicon.ico'
-    })
-    store.AppendSong({
-      name: 'olk', id: 1, src: 'https://shiinafan.top/static/sample2.mp3',
-      img: 'https://shiinafan.top/favicon.ico'
-    })
-    store.AppendSong({
-      name: 'Untitled World', id: 2, src: 'https://shiinafan.top/static/sample3.mp3',
-      img: 'https://shiinafan.top/favicon.ico'
-    })
-  });
 })()

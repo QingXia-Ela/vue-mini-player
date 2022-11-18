@@ -1,4 +1,4 @@
-import { SingleSongProps, SingleSongBriefInfo } from "./core"
+import { SingleSongProps } from "./core"
 import { logWarn, throwError } from "./utils"
 
 interface MusicPlayerCoreProps {
@@ -26,7 +26,7 @@ class MusicPlayerCore {
   public PlayMode: PlayModeType
   public IsMute: boolean
 
-  constructor({ ...props }: MusicPlayerCoreProps) {
+  constructor({ }: MusicPlayerCoreProps) {
     this.e = document.createElement('audio')
     this.e.volume = 0.1
     this.SongIdList = []

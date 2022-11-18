@@ -38,8 +38,7 @@ const Draggable = (ctx: any) => {
     return
   }
 
-  let dragging = false,
-    cx = 0, cy = 0
+  let cx = 0, cy = 0
 
   function _UpdateXY(x: number, y: number) {
     ele.style.setProperty('left', x + 'px')
@@ -67,9 +66,8 @@ const Draggable = (ctx: any) => {
   }
 
   ctx.el.addEventListener('mousedown', (e: MouseEvent) => {
-    dragging = true, cx = e.clientX - ele.offsetLeft, cy = e.clientY - ele.offsetTop
+    cx = e.clientX - ele.offsetLeft, cy = e.clientY - ele.offsetTop
     function cs() {
-      dragging = false
       clearState()
       window.removeEventListener('mouseup', cs)
     }
