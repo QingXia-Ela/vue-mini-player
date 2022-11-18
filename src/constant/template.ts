@@ -61,6 +61,9 @@ export default "<div v-scope id=\"CoreWrapper\" v-wrapper-adsorb @mouseup=\"wrap
   "</div>" +
   "<div :class=\"`list_box player_module ${showList ? 'show' : ''}`\" @mouseenter=\"wrapperMouseEnter\"" +
   "@mouseleave=\"wrapperMouseLeave\">" +
+  "<div class=\"empty_tips\">" +
+  "No Data :(" +
+  "</div>" +
   "<div :class=\"`song_item ${i.id === store.CurrentSongId ? 'current' : ''}`\"" +
   "v-for=\"(i, index) in songInfoList\" @dblclick=\"CorePlaySelectSong(i.id)\">" +
   "<div class=\"title\">" +
