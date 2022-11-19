@@ -39,6 +39,10 @@
 #CoreWrapper {
   &.dragging {
     transition: none !important;
+
+    .song_name {
+      cursor: grabbing !important;
+    }
   }
 
   .operate_box {
@@ -83,6 +87,10 @@
 
         .time {
           font-size: 13px;
+        }
+
+        &:hover {
+          cursor: grab;
         }
       }
 

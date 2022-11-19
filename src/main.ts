@@ -13,6 +13,8 @@ import template from './constant/template'
   // @ts-expect-error
   window._PlayerCore = store
 
+  console.log('Vue-Mini-Player powered by: https://github.com/QingXia-Ela/vue-mini-player');
+
   const _p = document.createElement('div')
 
   _p.setAttribute('id', 'CorePlayer')

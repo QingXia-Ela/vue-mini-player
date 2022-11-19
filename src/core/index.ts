@@ -81,6 +81,7 @@ class MusicPlayerCore {
         if (this.SongIdList.length === 1) {
           this.e.pause()
           this.e.src = ''
+          this.CurrentSongId = NaN
         } else {
           let i = this.SongIdList.indexOf(p.id)
           if (i === this.SongIdList.length - 1) i = 0
@@ -233,7 +234,9 @@ class MusicPlayerCore {
   }
 
   ChangeVolume(vol: number) {
-    if (vol >= 0 && vol <= 1) this.e.volume = vol
+    if (vol < 0 && vol <= 1) this.e.volume = 0
+    else if (vol > 1) this.e.volume = 1
+    else this.e.volume = vol
   }
 
   ChangeCurrentSongTime(time: number) {

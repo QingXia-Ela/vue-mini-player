@@ -34,6 +34,9 @@
 #CoreWrapper.dragging {
   transition: none !important;
 }
+#CoreWrapper.dragging .song_name {
+  cursor: grabbing !important;
+}
 #CoreWrapper .operate_box {
   display: flex;
   justify-content: center;
@@ -74,6 +77,9 @@
 }
 #CoreWrapper .operate_box .right_operate .song_name .time {
   font-size: 13px;
+}
+#CoreWrapper .operate_box .right_operate .song_name:hover {
+  cursor: grab;
 }
 #CoreWrapper .operate_box .right_operate .operation_button {
   display: flex;
