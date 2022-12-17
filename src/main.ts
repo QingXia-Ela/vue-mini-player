@@ -27,7 +27,7 @@ import template from './constant/template'
   const app = PetiteVue.createApp({
     store,
     dragging: false,
-    onRight: true,
+    onRight: false,
     hidden: true,
     hover: false,
     currentTime: 0,
