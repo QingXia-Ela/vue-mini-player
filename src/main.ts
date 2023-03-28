@@ -189,7 +189,7 @@ import template from './constant/template'
     CorePause() {
       store.Pause()
     },
-    CorePlaySelectSong(id: number) {
+    CorePlaySelectSong(id: string) {
       store.PlaySelectSong(id)
     }
   })

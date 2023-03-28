@@ -1,7 +1,7 @@
 
 export interface SingleSongBriefInfo {
   name: string,
-  id: number,
+  id: string,
   src: string,
   author?: string[],
   album?: string,

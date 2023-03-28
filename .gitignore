@@ -8,10 +8,14 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
 dist-ssr
 build
 *.local
+
+# dist ignore unnecessary files
+dist/index.html
+dist/pvue.js
+dist/vite.svg
 
 # Editor directories and files
 .vscode/*
