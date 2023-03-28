@@ -27,7 +27,7 @@ import template from './constant/template'
   const app = PetiteVue.createApp({
     store,
     dragging: false,
-    onRight: true,
+    onRight: false,
     hidden: true,
     hover: false,
     currentTime: 0,
@@ -189,7 +189,7 @@ import template from './constant/template'
     CorePause() {
       store.Pause()
     },
-    CorePlaySelectSong(id: number) {
+    CorePlaySelectSong(id: string) {
       store.PlaySelectSong(id)
     }
   })

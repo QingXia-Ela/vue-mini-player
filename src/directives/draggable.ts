@@ -1,3 +1,4 @@
+import throttle from 'lodash/throttle'
 /**
  * @example
  * 
@@ -39,27 +40,25 @@ const Draggable = (ctx: any) => {
   }
 
   let cx = 0, cy = 0
+  const CW = ele.clientWidth, CH = ele.clientHeight
 
   function _UpdateXY(x: number, y: number) {
     ele.style.setProperty('left', x + 'px')
     ele.style.setProperty('top', y + 'px')
   }
 
-  function onDrag(e: MouseEvent | {
+  const onDrag = throttle((e: MouseEvent | {
     clientX: number
     clientY: number
-  }) {
+  }) => {
     let fx = e.clientX - cx, fy = e.clientY - cy
-    if (fx <= 0) fx = 0
-    else if (fx + ele.offsetWidth >= window.innerWidth) fx = window.innerWidth - ele.offsetWidth
+    const WW = window.innerWidth, WH = window.innerHeight
+    if (fx <= -CW) fx = -CW
+    else if (fx + ele.offsetWidth >= WW + CW) fx = WW + CW - ele.offsetWidth
     if (fy <= 0) fy = 0
-    else if (fy + ele.offsetHeight >= window.innerHeight) fy = window.innerHeight - ele.offsetHeight
+    else if (fy + ele.offsetHeight >= WH) fy = WH - ele.offsetHeight
     _UpdateXY(fx, fy)
-  }
-
-  window.addEventListener('resize', () => {
-    onDrag({ clientX: window.innerWidth, clientY: window.innerHeight })
-  })
+  }, 16)
 
   function clearState() {
     window.removeEventListener('mousemove', onDrag)

@@ -6,6 +6,8 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite + TS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 
 <body>
@@ -67,26 +69,35 @@
   </div>
 </body>
 
-<script src="https://unpkg.com/petite-vue"></script>
+<!-- <script src="https://unpkg.com/petite-vue"></script> -->
+<script src="/pvue.js"></script>
 <script type="module" src="/src/main.ts"></script>
 
-<!-- <script type="module">
+<script type="module">
   const store = window._PlayerCore
 
   store.AppendSong({
     name: 'Infected',
-    id: 0,
+    id: 2,
     src: 'https://shiinafan.top/static/sample.mp3',
+    img: './vite copy.svg'
+  })
+  store.AppendSong({
+    name: 'olk',
+    id: 8,
+    src: 'https://shiinafan.top/static/sample2.mp3',
     img: 'https://shiinafan.top/favicon.ico'
   })
   store.AppendSong({
-    name: 'olk', id: 1, src: 'https://shiinafan.top/static/sample2.mp3',
+    name: 'Untitled World',
+    id: 0,
+    src: 'https://shiinafan.top/static/sample3.mp3',
     img: 'https://shiinafan.top/favicon.ico'
   })
-  store.AppendSong({
-    name: 'Untitled World', id: 2, src: 'https://shiinafan.top/static/sample3.mp3',
-    img: 'https://shiinafan.top/favicon.ico'
+  store.e.addEventListener('ended', (e) => {
+    console.log('end');
   })
-</script> -->
+  console.log(store.SongIdMap);
+</script>
 
 </html>

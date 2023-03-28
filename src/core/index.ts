@@ -19,30 +19,30 @@ function checkUndefined(p: any) {
 
 class MusicPlayerCore {
   public e: HTMLAudioElement
-  public SongIdList: number[]
-  public CurrentSongId: number
+  public SongIdList: string[]
+  public CurrentSongId: string
   public IsPlaying: boolean
-  public SongIdMap: { [key: number]: SingleSongProps }
+  public SongIdMap: { [key: string]: SingleSongProps }
   public PlayMode: PlayModeType
   public IsMute: boolean
 
-  constructor({ }: MusicPlayerCoreProps) {
+  constructor(o?: MusicPlayerCoreProps) {
     this.e = document.createElement('audio')
     this.e.volume = 0.1
     this.SongIdList = []
     this.SongIdMap = {}
     this.PlayMode = 1
-    this.CurrentSongId = -1
+    this.CurrentSongId = '?'
     this.IsPlaying = false
     this.IsMute = false
   }
 
   private _AppendSongByIndex(song: SingleSongProps, index: number) {
     this.SongIdList.splice(index, 0, song.id)
-    this.SongIdMap[song.id] = song
+    this.SongIdMap[song.id.toString()] = song
   }
 
-  private _ApeendCheck(song: SingleSongProps) {
+  private _AppendCheck(song: SingleSongProps) {
     if (!song)
       throwError('AppendSong function had been call but without song info.')
     else if (this.SongIdList.indexOf(song.id) !== -1 || this.SongIdMap[song.id])
@@ -55,16 +55,8 @@ class MusicPlayerCore {
    * @param fromTail Let query begin at tail.
    * @returns The info of the song.
    */
-  QuerySongInfo(mark: string | number, fromTail = false) {
-    let qId = -1
-    if (typeof mark === 'number') qId = mark
-    else {
-      for (const i in this.SongIdMap) {
-        const val = this.SongIdMap[i]
-        if ((qId === -1 || fromTail) && val.name === mark) qId = parseInt(i)
-      }
-    }
-    return this.SongIdMap[qId]
+  QuerySongInfo(mark: string) {
+    return this.SongIdMap[mark.toString()]
   }
 
   /**
@@ -72,16 +64,16 @@ class MusicPlayerCore {
    * @param mark Song's id or name.
    * @param fromTail Delete song from tail.
    */
-  RemoveSong(mark: string | number, fromTail = false) {
+  RemoveSong(mark: string) {
     checkUndefined(mark)
-    const p = this.QuerySongInfo(mark, fromTail)
+    const p = this.QuerySongInfo(mark)
     if (p) {
       // if it's current song, stop it.
       if (this.CurrentSongId === p.id) {
         if (this.SongIdList.length === 1) {
           this.e.pause()
           this.e.src = ''
-          this.CurrentSongId = NaN
+          this.CurrentSongId = '?'
         } else {
           let i = this.SongIdList.indexOf(p.id)
           if (i === this.SongIdList.length - 1) i = 0
@@ -101,14 +93,14 @@ class MusicPlayerCore {
   /**
    * Append a song to songs list.
    * @param song Song's info.
-   * @param mark Append the song after appoint song id or name.If it's undefined, it will append to tail.
+   * @param mark Append the song after appoint song id. If it's undefined, it will append to tail.
    * @param fromTail Query song from list tail and append it.
    */
-  AppendSong(song: SingleSongProps, mark?: string | number, fromTail = false) {
-    this._ApeendCheck(song)
-    let appendPos = typeof mark === 'number' ? mark : this.SongIdList.length
+  AppendSong(song: SingleSongProps, mark?: string) {
+    this._AppendCheck(song)
+    let appendPos = this.SongIdList.length
     if (typeof mark === 'string') {
-      const s = this.QuerySongInfo(mark, fromTail)
+      const s = this.QuerySongInfo(mark)
       if (s) {
         const p = this.SongIdList.indexOf(s.id)
         if (p < appendPos && p >= 0) appendPos = p + 1
@@ -122,7 +114,7 @@ class MusicPlayerCore {
    * @param song Song's info.
    */
   AppendSongOnHead(song: SingleSongProps) {
-    this._ApeendCheck(song)
+    this._AppendCheck(song)
     this._AppendSongByIndex(song, -1)
   }
 
@@ -131,7 +123,7 @@ class MusicPlayerCore {
    * @param song Song's info.
    */
   AppendSongOnTail(song: SingleSongProps) {
-    this._ApeendCheck(song)
+    this._AppendCheck(song)
     this._AppendSongByIndex(song, this.SongIdList.length)
   }
 
@@ -149,7 +141,7 @@ class MusicPlayerCore {
    * Update Song Position on SongIdList
    * @param list New songs list position array
    */
-  UpdateSongPosition(list: number[]) {
+  UpdateSongPosition(list: string[]) {
     // Check list size.
     if (list.length != this.SongIdList.length)
       throwError('Update Song Position size is not equal with old list size')
@@ -158,11 +150,11 @@ class MusicPlayerCore {
     const s = new Set(this.SongIdList.map((val) => val))
     list.forEach((val) => { s.delete(val) })
     if (s.size) {
-      const l: number[] = []
+      const l: string[] = []
       s.forEach((val) => {
         l.push(val)
       })
-      throwError('New list has unknown id: ' + l)
+      throwError('New list has unknown id: ' + l.toString())
     }
 
     this.SongIdList = list
@@ -172,7 +164,7 @@ class MusicPlayerCore {
    * Play song with seleted song's id.
    * @param id Song's id.
    */
-  PlaySelectSong(id: number) {
+  PlaySelectSong(id: string) {
     const s = this.SongIdMap[id]
     if (this.SongIdList.indexOf(id) === -1) {
       logWarn(`Song's id: '${id}' is not in the id list or it's not corrent number.`)
