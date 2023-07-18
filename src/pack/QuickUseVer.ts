@@ -1,0 +1,1 @@
+/** version can inject quickly without new object */

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS</title>
+  <link rel="stylesheet" href="../release/mini-player.css">
+</head>
+
+<body>
+  <div id="app"></div>
+
+</body>
+<script type="module">
+  import VueMiniPlayerCore from '../release/mini-player.full.esm.js';
+  const { PlayerCore } = new VueMiniPlayerCore({
+    defaultIconPath: './icon.jpg',
+  });
+
+  PlayerCore.AppendSong({
+    name: "Libertas",
+    id: "1",
+    src: "./Libertas.mp3"
+  })
+</script>
+
+</html>

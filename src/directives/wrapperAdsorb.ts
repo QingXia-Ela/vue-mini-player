@@ -1,6 +1,7 @@
 const exp = /left|right/
 
 const Adsorb = (ctx: any) => {
+
   const e = ctx.el as HTMLElement, resetPos = () => {
     if (e.offsetLeft > window.innerWidth / 2) {
       e.setAttribute('class', `${e.getAttribute('class')?.replace(exp, '')} right`)

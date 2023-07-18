@@ -1,16 +1,17 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
+import vitePluginString from "vite-plugin-string";
 
 export default defineConfig({
-  // ...
   build: {
-    assetsDir: './',
-    rollupOptions: {
-      output: {
-        assetFileNames: "[name][extname]",
-        entryFileNames: `[name].js`,
-        chunkFileNames: `[name].js`,
-      },
-    },
-    emptyOutDir: true
+    // assetsInlineLimit: 40000
   },
+  plugins: [
+    // @ts-expect-error
+    vitePluginString({
+      include: ["**/*.html"],
+      compress(code) {
+        return code
+      }
+    })
+  ]
 })

@@ -40,7 +40,7 @@ const Draggable = (ctx: any) => {
   }
 
   let cx = 0, cy = 0
-  const CW = ele.clientWidth, CH = ele.clientHeight
+  const CW = ele.clientWidth
 
   function _UpdateXY(x: number, y: number) {
     ele.style.setProperty('left', x + 'px')

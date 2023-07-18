@@ -1,9 +1,15 @@
 /// <reference types="vite/client" />
+/// <reference types="petite-vue/dist/types" />
 
-declare module PetiteVue {
+// wtf pvue couldn't import types
+declare module "petite-vue" {
+  import { createApp, reactive } from 'petite-vue'
   export {
     createApp,
-    nextTick,
     reactive
   }
+}
+
+declare namespace PetiteVue {
+  export * from 'petite-vue'
 }
