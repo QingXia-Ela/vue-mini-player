@@ -11,7 +11,7 @@ This is a simple mini player which is based on [petite-vue](https://github.com/v
 
 ## Usage
 
-Go to [release](./release) page to download it.
+Go to [releases](./releases) page to download it.
 
 Use them in your html page:
 
