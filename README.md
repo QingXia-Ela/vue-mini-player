@@ -21,11 +21,10 @@ Use them in your html page:
 
 <!-- Petite Vue CDN -->
 <script src="https://unpkg.com/petite-vue"></script>
-<!-- .js file path -->
-<script src="mini-player.esm.js" type="module"></script>
 
 <script type="module">
-  import VueMiniPlayerCore from './pack/WithoutPvue'
+  // import js file at here!!
+  import VueMiniPlayerCore from 'mini-player.esm.js'
 
   const { PlayerCore } = new VueMiniPlayerCore()
 
@@ -47,8 +46,18 @@ If you don't want to use cdn file of js you can import the full ver which includ
 <!-- .css file path -->
 <link rel="stylesheet" href="mini-player.css">
 
-<!-- .js file path -->
-<script src="mini-player.esm.full.js" type="module"></script>
+<script type="module">
+  // import js file at here!!
+  import VueMiniPlayerCore from 'mini-player.full.esm.js'
+
+  const { PlayerCore } = new VueMiniPlayerCore()
+
+  PlayerCore.AppendSong({
+    name: "Libertas",
+    id: "1",
+    src: "./Libertas.mp3"
+  })
+</script>
 ```
 
 File size will increase ~17kb.
