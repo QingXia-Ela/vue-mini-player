@@ -2,6 +2,8 @@
 
 This is a simple mini player which is based on [petite-vue](https://github.com/vuejs/petite-vue)
 
+**NOTE: This project will reconfigure it in 2024. :)**
+
 ## Features
 
 - 24kb size (CSS + JS without petite-vue).
