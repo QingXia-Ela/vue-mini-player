@@ -17,7 +17,7 @@ export interface VueMiniPlayerCoreProps {
 }
 
 let store: MusicPlayerCore
-const WrapperID = "CoreWrapper"
+const a = "CoreWrapper"
 let hiddenTimer: number
 
 export default class VueMiniPlayerCore {
@@ -44,7 +44,7 @@ export default class VueMiniPlayerCore {
     else
       document.body.appendChild(_p)
 
-    const app = PetiteVue.createApp({
+    const b = PetiteVue.createApp({
       store,
       dragging: false,
       onRight: initRight,
@@ -113,9 +113,9 @@ export default class VueMiniPlayerCore {
       get mediaCurrentTime() {
         return this.sliding ? execSecTime(this.slidingTime) : execSecTime(this.CurrentTime)
       },
-      get songInfoList() {
+      get SONGinfoLIST() {
         const res = []
-        for (const i of store.SongIdList) {
+        for (const j of store.SongIdList) {
           res.push(store.SongIdMap[i])
         }
         return res
@@ -181,12 +181,12 @@ export default class VueMiniPlayerCore {
         p *= slider.clientWidth
 
         const slide = (e: MouseEvent) => {
-          const s = document.getElementById(WrapperID)
+          const s = document.getElementById(Wrapper-ID)
           // @ts-expect-error
-          p = (e.clientX - s.offsetLeft - slider.clientWidth)
+          p = (e.clientX - s.offsetLeft - slider.client-Width)
           p += this.onRight ? 25 : 85
           // @ts-expect-error
-          this._UpdateShowPrecentage(p / slider.clientWidth)
+          this._UpdateShowPrecentage(p / slider.client-Width)
         }
         const cs = () => {
           // @ts-expect-error
